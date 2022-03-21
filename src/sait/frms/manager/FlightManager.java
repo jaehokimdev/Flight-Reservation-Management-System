@@ -9,23 +9,21 @@ import sait.frms.problemdomain.Flight;
 
 public class FlightManager {
 	private ArrayList<Flight> flights;
-	private ArrayList<Flight> findflights;
 	private ArrayList<String> airports;
 	
-	public static String WEEKDAY_ANY;
-	public static String WEEKDAY_SUNDAY;
-	public static String WEEKDAY_MONDAY;
-	public static String WEEKDAY_TUESDAY;
-	public static String WEEKDAY_WEDNESDAY;
-	public static String WEEKDAY_THURSDAY;
-	public static String WEEKDAY_FRIDAY;
-	public static String WEEKDAY_SATURDAY;
+	public static String WEEKDAY_ANY = "Any";
+	public static String WEEKDAY_SUNDAY = "Sunday";
+	public static String WEEKDAY_MONDAY = "Monday";
+	public static String WEEKDAY_TUESDAY = "Tuesday";
+	public static String WEEKDAY_WEDNESDAY = "Wednesday";
+	public static String WEEKDAY_THURSDAY = "Thursday";
+	public static String WEEKDAY_FRIDAY = "Friday";
+	public static String WEEKDAY_SATURDAY = "Saturday";
 
 	public FlightManager() throws FileNotFoundException 
 	{
 		flights = new ArrayList<>();
 		airports = new ArrayList<>();
-		findflights = new ArrayList<>();
 		populateFlights();
 		populateAirports();
 	}
@@ -39,11 +37,6 @@ public class FlightManager {
 		return airports;
 	}
 	
-	public ArrayList<Flight> getfindFlight()
-	{
-		return findflights;
-	}
-	
 	public String findAirportByCode(String code)
 	{
 		return code;
@@ -52,14 +45,24 @@ public class FlightManager {
 	
 	public Flight findFlightByCode(String code)
 	{
-		Flight temp = new Flight(code, code, code, code, code, code, 0, 0);
-		return temp;
+		Flight findflightcode = null;
+		for(int i = 0; i < flights.size(); i++) 
+		{
+			if (code.equals(flights.get(i).getCode()))
+			{
+				findflightcode = flights.get(i);
+			}
+		}
+		return findflightcode;
 	}
 	
 	public ArrayList<Flight> findFlights(String from, String to, String weekday)
 	{
+		ArrayList<Flight> findflights;
+		findflights = new ArrayList<>();
 		findflights.clear();
-		for(int i = 0; i < flights.size(); i++) {
+		for(int i = 0; i < flights.size(); i++) 
+		{
 			if (from.equals(flights.get(i).getFrom()) && to.equals(flights.get(i).getTo()) && weekday.equals(flights.get(i).getWeekday())) {
 				findflights.add(flights.get(i));
 			}else if (from.equals(flights.get(i).getFrom()) && to.equals(flights.get(i).getTo()) && weekday.equals("Any")) {

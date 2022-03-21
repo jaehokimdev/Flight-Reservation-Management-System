@@ -5,7 +5,6 @@ import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import sait.frms.gui.FlightsTab.MyListSelectionListener;
 import sait.frms.manager.ReservationManager;
 import sait.frms.problemdomain.Flight;
 import sait.frms.problemdomain.Reservation;
@@ -122,9 +121,28 @@ public class ReservationsTab extends TabBase {
 	private JPanel createCenterPanel() 
 	{
 		JPanel panel = new JPanel();
+	    reservationModel = new DefaultListModel<>();
+	    reservationsList = new JList<>(reservationModel);
 		
+		// User can only select one item at a time.
+	    reservationsList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		
+		// Wrap JList in JScrollPane so it is scrollable.
+		JScrollPane scrollPane = new JScrollPane(this.reservationsList);
+		
+		reservationsList.addListSelectionListener(new ListSelectionListener()
+				{
+				@Override
+				public void valueChanged(ListSelectionEvent e) 
+				{
+				
+				}
+				});
+		
+	
+		scrollPane.setPreferredSize(new Dimension(500,280));
 		panel.setLayout(new BorderLayout());
-		panel.add(getCenterCenterPanel(), BorderLayout.CENTER);
+		panel.add(scrollPane);
 		panel.add(getCenterEastPanel(), BorderLayout.EAST);
 
 		
@@ -222,34 +240,5 @@ public class ReservationsTab extends TabBase {
 		return panel;
 	}
 
-	private JPanel getCenterCenterPanel() 
-	{ 
-    JPanel panel = new JPanel();
-    reservationModel = new DefaultListModel<>();
-    reservationsList = new JList<>(reservationModel);
 	
-	// User can only select one item at a time.
-    reservationsList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-	
-	// Wrap JList in JScrollPane so it is scrollable.
-	JScrollPane scrollPane = new JScrollPane(this.reservationsList);
-	
-	reservationsList.addListSelectionListener(new MyListSelectionListener());
-	scrollPane.setPreferredSize(new Dimension(500,280));
-	panel.add(scrollPane);
-	
-	return panel; 
-	}
-	
-	public class MyListSelectionListener implements ListSelectionListener 
-	{
-		/**
-		 * Called when user selects an item in the JList.
-		 */
-		@Override
-		public void valueChanged(ListSelectionEvent e) {
-			
-		}
-		
-	}
 }
