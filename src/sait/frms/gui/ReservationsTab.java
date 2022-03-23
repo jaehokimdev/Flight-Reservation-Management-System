@@ -1,6 +1,11 @@
 package sait.frms.gui;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -23,6 +28,20 @@ public class ReservationsTab extends TabBase {
 	
 	private DefaultListModel<Reservation> reservationModel;
 	
+	private ArrayList<Reservation> reservations;
+	
+	private Reservation selectedreservation;
+	
+	JTextField findcodetext;
+	JTextField findairlinetext;
+	JTextField findnametext;
+	JTextField selectedcodeText;
+	JTextField flightText;
+	JTextField selectedairlineText;
+	JTextField costText;
+	JTextField selectednameText;
+	JTextField citizenshipText;
+	JComboBox statuscomboBox;
 	/**
 	 * Creates the components for reservations tab.
 	 */
@@ -55,6 +74,23 @@ public class ReservationsTab extends TabBase {
 		JPanel panel = new JPanel();
 		JButton findReservationButton = new JButton("Find Reservations");
 		panel.add(findReservationButton);
+		findReservationButton.addActionListener(new ActionListener()
+			{
+			@Override
+			public void actionPerformed(ActionEvent e) 
+			{
+			String findcode = findcodetext.getText(); 
+			String findairline = findairlinetext.getText(); 
+			String findname = findnametext.getText();
+			try {
+				reservations = reservationManager.findReservations(findcode, findairline, findname);
+			} catch (IOException e1) {
+				
+			}
+			printreservations();
+			}	
+			});
+
 		return panel;
 	}
 	
@@ -70,23 +106,23 @@ public class ReservationsTab extends TabBase {
 
 		JLabel code = new JLabel("Code:");
 		code.setFont(new Font("serif", Font.PLAIN, 13));
-		JTextField codetext = new JTextField();
+		findcodetext = new JTextField();
 		
 		JLabel airline = new JLabel("Airline:");
 		airline.setFont(new Font("serif", Font.PLAIN, 13));
-		JTextField airlinetext = new JTextField();
+		findairlinetext = new JTextField();
 		
 		JLabel name = new JLabel("Name");
 		name.setFont(new Font("serif", Font.PLAIN, 13));
-		JTextField nametext = new JTextField();
+		findnametext = new JTextField();
 		
 		panel.setVisible(true);
 		panel.add(code);
-		panel.add(codetext);
+		panel.add(findcodetext);
 		panel.add(airline);
-		panel.add(airlinetext);
+		panel.add(findairlinetext);
 		panel.add(name);
-		panel.add(nametext);
+		panel.add(findnametext);
 		
 		return panel;
 	}
@@ -135,7 +171,16 @@ public class ReservationsTab extends TabBase {
 				@Override
 				public void valueChanged(ListSelectionEvent e) 
 				{
-				
+					String selectedreservationcode = reservationsList.getSelectedValue().getCode();
+					selectedreservation = reservationManager.findReservationByCode(selectedreservationcode);
+					selectedcodeText.setText(selectedreservation.getCode());
+					flightText.setText(selectedreservation.getFlightCode());
+					selectedairlineText.setText(selectedreservation.getAirline());
+					costText.setText(String.valueOf("$" + selectedreservation.getCost()));
+					selectednameText.setText(selectedreservation.getName());
+					citizenshipText.setText(selectedreservation.getCitizenship());
+					statuscomboBox.setEnabled(selectedreservation.isActive());
+					
 				}
 				});
 		
@@ -166,6 +211,7 @@ public class ReservationsTab extends TabBase {
 		JPanel panel = new JPanel();
 		JButton reserveButton = new JButton("Update");
 		panel.add(reserveButton);
+		// event => 
 		return panel;
 
 	}
@@ -181,48 +227,47 @@ public class ReservationsTab extends TabBase {
 		
 		JLabel code = new JLabel("Code:");
 		code.setFont(new Font("serif", Font.PLAIN, 13));
-		JTextField codeText = new JTextField(20);
-		codeText.setEnabled(false);
+		selectedcodeText = new JTextField(20);
+		selectedcodeText.setEnabled(false);
 
 		JLabel flight = new JLabel("Flight:");
 		flight.setFont(new Font("serif", Font.PLAIN, 13));
-		JTextField flightText = new JTextField(20);
+		flightText = new JTextField(20);
 		flightText.setEnabled(false);
 
 		JLabel airline = new JLabel("Airline:");
 		airline.setFont(new Font("serif", Font.PLAIN, 13));
-		JTextField airlineText = new JTextField(20);
-		airlineText.setEnabled(false);
+		selectedairlineText = new JTextField(20);
+		selectedairlineText.setEnabled(false);
 
 		JLabel cost = new JLabel("Cost:");
 		cost.setFont(new Font("serif", Font.PLAIN, 13));
-		JTextField costText = new JTextField(20);
+		costText = new JTextField(20);
 		costText.setEnabled(false);
 
 		JLabel name = new JLabel("Name:");
 		name.setFont(new Font("serif", Font.PLAIN, 13));
-		JTextField nameText = new JTextField(20);
-		nameText.setEnabled(false);
+		selectednameText = new JTextField(20);
 
 		JLabel citizenship = new JLabel("Citizenship:");
 		citizenship.setFont(new Font("serif", Font.PLAIN, 13));
-		JTextField citizenshipText = new JTextField(20);		
+		citizenshipText = new JTextField(20);		
 		
 		JLabel status = new JLabel("Status:");
 		status.setFont(new Font("serif", Font.PLAIN, 13));
-		JComboBox statuscomboBox = new JComboBox(statuslist);
+		statuscomboBox = new JComboBox(statuslist);
 		
 		panel.setVisible(true);
 		panel.add(code);
-		panel.add(codeText);
+		panel.add(selectedcodeText);
 		panel.add(flight);
 		panel.add(flightText);
 		panel.add(airline);
-		panel.add(airlineText);
+		panel.add(selectedairlineText);
 		panel.add(cost);
 		panel.add(costText);
 		panel.add(name);
-		panel.add(nameText);
+		panel.add(selectednameText);
 		panel.add(citizenship);
 		panel.add(citizenshipText);
 		panel.add(status);
@@ -239,6 +284,12 @@ public class ReservationsTab extends TabBase {
 		panel.add(title);
 		return panel;
 	}
+	private void printreservations() 
+	{
+		reservationModel.clear();
+		for (int i = 0; i < reservations.size(); i++) {
+			reservationModel.addElement(reservations.get(i));
+		}
+	}
 
-	
 }
