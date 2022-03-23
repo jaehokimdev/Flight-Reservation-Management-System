@@ -13,6 +13,7 @@ import javax.swing.event.*;
 import sait.frms.manager.FlightManager;
 import sait.frms.manager.ReservationManager;
 import sait.frms.problemdomain.Flight;
+import sait.frms.problemdomain.Reservation;
 
 /**
  * Holds the components for the flights tab.
@@ -38,6 +39,8 @@ public class FlightsTab extends TabBase implements ActionListener {
 	private DefaultListModel<String> flightsModel;
 	
 	private ArrayList<Flight> findflight;
+	
+	private Flight selectedFlight;
 
 	/**
 	 * Creates the components for flights tab.
@@ -187,7 +190,7 @@ public class FlightsTab extends TabBase implements ActionListener {
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
 				String selectedFlightCode = flightsList.getSelectedValue().substring(0, 7);
-				Flight selectedFlight = flightManager.findFlightByCode(selectedFlightCode);
+				selectedFlight = flightManager.findFlightByCode(selectedFlightCode);
 				flightText.setText(selectedFlight.getCode());
 				airlineText.setText(selectedFlight.getAirlineName());
 				dayText.setText(selectedFlight.getWeekday());
@@ -223,6 +226,15 @@ public class FlightsTab extends TabBase implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent e) 
 			{
+				if (nameText.getText() == null || citizenshipText.getText() == null)
+				{
+					JOptionPane.showMessageDialog(null, "Please type name and citizenship");
+				}else
+				{
+					Reservation reservation = reservationManager.makeReservation(selectedFlight, nameText.getText(), citizenshipText.getText());
+					String reservationcode = reservation.getCode();
+					JOptionPane.showMessageDialog(null, "Reservation created. Your code is " + reservationcode);
+				}
 				
 			}	
 				
