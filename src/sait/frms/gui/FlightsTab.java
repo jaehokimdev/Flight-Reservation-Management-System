@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -231,9 +232,16 @@ public class FlightsTab extends TabBase implements ActionListener {
 					JOptionPane.showMessageDialog(null, "Please type name and citizenship");
 				}else
 				{
-					Reservation reservation = reservationManager.makeReservation(selectedFlight, nameText.getText(), citizenshipText.getText());
-					String reservationcode = reservation.getCode();
-					JOptionPane.showMessageDialog(null, "Reservation created. Your code is " + reservationcode);
+					Reservation reservation;
+					try {
+						reservation = reservationManager.makeReservation(selectedFlight, nameText.getText(), citizenshipText.getText());
+						String reservationcode = reservation.getCode();
+						JOptionPane.showMessageDialog(null, "Reservation created. Your code is " + reservationcode);
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					
 				}
 				
 			}	
@@ -311,7 +319,7 @@ public class FlightsTab extends TabBase implements ActionListener {
 		return panel;
 	}
 
-	public void printflight() {
+	private void printflight() {
 		
 		flightsModel.clear();
 		for (int i = 0; i < findflight.size(); i++) {

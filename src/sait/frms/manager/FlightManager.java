@@ -81,11 +81,11 @@ public class FlightManager {
 		{
 			String line = file.nextLine();
 			String[] field = line.split(",");
-			Flight Flights = null;
+			Flight flight = null;
 
-			Flights = new Flight(field[0], field[1], field[2], field[3], field[4], field[5], Integer.parseInt(field[6]), Double.parseDouble(field[7]));
+			flight = new Flight(field[0], field[1], field[2], field[3], field[4], field[5], Integer.parseInt(field[6]), Double.parseDouble(field[7]));
 
-			flights.add(Flights);
+			flights.add(flight);
 
 		}
 		file.close();
