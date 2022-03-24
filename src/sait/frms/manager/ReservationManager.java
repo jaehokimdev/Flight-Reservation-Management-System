@@ -1,6 +1,5 @@
 package sait.frms.manager;
 
-import java.io.EOFException;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
@@ -23,6 +22,7 @@ public class ReservationManager {
 		populateFromBinary();
 		Reservation reservation = null;
 		String reservationcode = generateReservationCode(flight);
+
 		if (flight.getSeats() > 0) 
 		{
 			reservation = new Reservation(reservationcode, flight.getCode(), flight.getAirlineName(), name, citizenship, flight.getCostPerSeat(), true);
@@ -40,15 +40,18 @@ public class ReservationManager {
 		ArrayList<Reservation> findreservation = new ArrayList<Reservation>();
 		
 		for (int i = 0; i < reservations.size(); i++) {
-		
-			if (reservations.get(i).getCode() != "" && reservations.get(i).getCode().contains(code))
+			
+			if (!code.isEmpty() && reservations.get(i).getCode().contains(code))
+			{
+				findreservation.add(reservations.get(i));
+			}else if (!airline.isEmpty() && reservations.get(i).getAirline().contains(airline))
+			{
+				findreservation.add(reservations.get(i));
+			}else if (!name.isEmpty() && reservations.get(i).getName().contains(name))
 			{
 				findreservation.add(reservations.get(i));
 			}
-//			if (reservations.get(i).getCode().contains(code) || reservations.get(i).getAirline().contains(airline) || reservations.get(i).getName().contains(name))
-//			{
-//				findreservation.add(reservations.get(i));
-//			}
+			
 		}
 		
 		return findreservation;
@@ -74,8 +77,6 @@ public class ReservationManager {
 	{
 		RandomAccessFile raf = new RandomAccessFile("res/reservation.dat", "rw");
 			
-		raf.seek(raf.length());
-
 		for(int i = 0; i < reservations.size(); i++)
 		{
 			
@@ -98,7 +99,6 @@ public class ReservationManager {
 		
 		raf.writeBoolean(reservations.get(i).isActive());
 		}
-		
 		reservations.clear();
 	}
 	
@@ -140,10 +140,11 @@ public class ReservationManager {
 			double cost = raf.readDouble();
 			boolean active = raf.readBoolean();
 			
-			// File position is advanced BOOK_SIZE by the time it reaches here.
 			
 			reservation = new Reservation(code, flightcode, airline, name, citizenship, cost, active);
+			if (reservation.isActive()) {
 			reservations.add(reservation);
 			}
+		}
 	}
 }

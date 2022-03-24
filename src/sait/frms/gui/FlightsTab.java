@@ -197,6 +197,8 @@ public class FlightsTab extends TabBase implements ActionListener {
 				dayText.setText(selectedFlight.getWeekday());
 				timeText.setText(selectedFlight.getTime());
 				costText.setText(String.valueOf("$" + selectedFlight.getCostPerSeat()));
+				nameText.setText("");
+				citizenshipText.setText("");
 			}
 				
 		});
@@ -227,7 +229,7 @@ public class FlightsTab extends TabBase implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent e) 
 			{
-				if (nameText.getText() == null || citizenshipText.getText() == null)
+				if (nameText.getText().isEmpty() || citizenshipText.getText().isEmpty())
 				{
 					JOptionPane.showMessageDialog(null, "Please type name and citizenship");
 				}else

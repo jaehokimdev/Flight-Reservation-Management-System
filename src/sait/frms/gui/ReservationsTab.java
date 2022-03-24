@@ -31,7 +31,7 @@ public class ReservationsTab extends TabBase {
 	private ArrayList<Reservation> reservations;
 	
 	private Reservation selectedreservation;
-	
+		
 	JTextField findcodetext;
 	JTextField findairlinetext;
 	JTextField findnametext;
@@ -180,7 +180,6 @@ public class ReservationsTab extends TabBase {
 					selectednameText.setText(selectedreservation.getName());
 					citizenshipText.setText(selectedreservation.getCitizenship());
 					statuscomboBox.setEnabled(selectedreservation.isActive());
-					
 				}
 				});
 		
@@ -211,7 +210,28 @@ public class ReservationsTab extends TabBase {
 		JPanel panel = new JPanel();
 		JButton reserveButton = new JButton("Update");
 		panel.add(reserveButton);
-		// event => 
+		reserveButton.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent e) 
+			{
+				String selectedreservationcode = reservationsList.getSelectedValue().getCode();
+				selectedreservation = reservationManager.findReservationByCode(selectedreservationcode);
+				selectedreservation.setName(selectednameText.getText());
+				selectedreservation.setCitizenship(citizenshipText.getText());
+				if (statuscomboBox.getSelectedItem().toString().equals("Active")) {
+					selectedreservation.setActive(true);
+				}else if (statuscomboBox.getSelectedItem().toString().equals("Inactive")) {
+					selectedreservation.setActive(false);
+				}
+				try {
+					reservationManager.persist();
+				} catch (IOException e1) {
+					
+				}
+			}
+		});
+
 		return panel;
 
 	}
