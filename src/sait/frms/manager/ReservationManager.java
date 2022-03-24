@@ -1,6 +1,5 @@
 package sait.frms.manager;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
@@ -51,7 +50,6 @@ public class ReservationManager {
 			{
 				findreservation.add(reservations.get(i));
 			}
-			
 		}
 		
 		return findreservation;
@@ -99,7 +97,6 @@ public class ReservationManager {
 		
 		raf.writeBoolean(reservations.get(i).isActive());
 		}
-		reservations.clear();
 	}
 	
 	private int getAvailableSeats(Flight flight)
@@ -127,6 +124,7 @@ public class ReservationManager {
 	
 	private void populateFromBinary() throws IOException
 	{
+		this.reservations.clear();
 		RandomAccessFile raf = new RandomAccessFile("res/reservation.dat", "rw");
 		Reservation reservation = null;
 		for (long position = 0; position < raf.length(); position += 91) {

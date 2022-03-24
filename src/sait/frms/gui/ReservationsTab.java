@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -30,6 +31,8 @@ public class ReservationsTab extends TabBase {
 	
 	private ArrayList<Reservation> reservations;
 	
+	private ArrayList<Reservation> selectedreservations;
+	
 	private Reservation selectedreservation;
 		
 	JTextField findcodetext;
@@ -42,6 +45,7 @@ public class ReservationsTab extends TabBase {
 	JTextField selectednameText;
 	JTextField citizenshipText;
 	JComboBox statuscomboBox;
+	
 	/**
 	 * Creates the components for reservations tab.
 	 */
@@ -73,6 +77,7 @@ public class ReservationsTab extends TabBase {
 	private JPanel getSouthSouthPanel() {
 		JPanel panel = new JPanel();
 		JButton findReservationButton = new JButton("Find Reservations");
+		selectedreservations = new ArrayList<>();
 		panel.add(findReservationButton);
 		findReservationButton.addActionListener(new ActionListener()
 			{
@@ -83,7 +88,8 @@ public class ReservationsTab extends TabBase {
 			String findairline = findairlinetext.getText(); 
 			String findname = findnametext.getText();
 			try {
-				reservations = reservationManager.findReservations(findcode, findairline, findname);
+				selectedreservations = reservationManager.findReservations(findcode, findairline, findname);
+				
 			} catch (IOException e1) {
 				
 			}
@@ -171,6 +177,10 @@ public class ReservationsTab extends TabBase {
 				@Override
 				public void valueChanged(ListSelectionEvent e) 
 				{
+					if (reservationsList.getSelectedIndex() == -1) {
+						
+					}else
+					{
 					String selectedreservationcode = reservationsList.getSelectedValue().getCode();
 					selectedreservation = reservationManager.findReservationByCode(selectedreservationcode);
 					selectedcodeText.setText(selectedreservation.getCode());
@@ -179,7 +189,8 @@ public class ReservationsTab extends TabBase {
 					costText.setText(String.valueOf("$" + selectedreservation.getCost()));
 					selectednameText.setText(selectedreservation.getName());
 					citizenshipText.setText(selectedreservation.getCitizenship());
-					statuscomboBox.setEnabled(selectedreservation.isActive());
+					statuscomboBox.setSelectedIndex(0);;
+					}
 				}
 				});
 		
@@ -226,6 +237,7 @@ public class ReservationsTab extends TabBase {
 				}
 				try {
 					reservationManager.persist();
+					JOptionPane.showMessageDialog(null, "Updated!");
 				} catch (IOException e1) {
 					
 				}
@@ -306,9 +318,10 @@ public class ReservationsTab extends TabBase {
 	}
 	private void printreservations() 
 	{
+		
 		reservationModel.clear();
-		for (int i = 0; i < reservations.size(); i++) {
-			reservationModel.addElement(reservations.get(i));
+		for (int i = 0; i < selectedreservations.size(); i++) {
+			reservationModel.addElement(selectedreservations.get(i));
 		}
 	}
 

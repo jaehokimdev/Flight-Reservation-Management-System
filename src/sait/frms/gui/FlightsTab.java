@@ -189,16 +189,22 @@ public class FlightsTab extends TabBase implements ActionListener {
 		flightsList.addListSelectionListener(new ListSelectionListener(){
 	
 			@Override
-			public void valueChanged(ListSelectionEvent e) {
-				String selectedFlightCode = flightsList.getSelectedValue().substring(0, 7);
-				selectedFlight = flightManager.findFlightByCode(selectedFlightCode);
-				flightText.setText(selectedFlight.getCode());
-				airlineText.setText(selectedFlight.getAirlineName());
-				dayText.setText(selectedFlight.getWeekday());
-				timeText.setText(selectedFlight.getTime());
-				costText.setText(String.valueOf("$" + selectedFlight.getCostPerSeat()));
-				nameText.setText("");
-				citizenshipText.setText("");
+			public void valueChanged(ListSelectionEvent e)
+			{
+				if (flightsList.getSelectedIndex() == -1) {
+					
+				}else
+				{
+					String selectedFlightCode = flightsList.getSelectedValue().substring(0, 7);
+					selectedFlight = flightManager.findFlightByCode(selectedFlightCode);
+					flightText.setText(selectedFlight.getCode());
+					airlineText.setText(selectedFlight.getAirlineName());
+					dayText.setText(selectedFlight.getWeekday());
+					timeText.setText(selectedFlight.getTime());
+					costText.setText(String.valueOf("$" + selectedFlight.getCostPerSeat()));
+					nameText.setText("");
+					citizenshipText.setText("");
+				}
 			}
 				
 		});
