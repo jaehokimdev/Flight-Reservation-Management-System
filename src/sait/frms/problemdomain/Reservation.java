@@ -65,7 +65,4 @@ public class Reservation {
 	public String toString() {
 		return code;
 	}
-	
-	
-
 }

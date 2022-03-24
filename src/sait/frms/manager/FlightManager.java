@@ -36,7 +36,7 @@ public class FlightManager {
 	{
 		return airports;
 	}
-	
+
 	public String findAirportByCode(String code)
 	{
 		return code;
