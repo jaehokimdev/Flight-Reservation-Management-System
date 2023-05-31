@@ -16,6 +16,10 @@ public class ReservationManager {
 		this.reservations = new ArrayList<>();
 	}
 	
+	/**
+	 * Makes a reservation.
+	 * @return Created reservation instance.
+	 */
 	public Reservation makeReservation(Flight flight, String name, String citizenship) throws IOException 
 	{ 
 		populateFromBinary();
@@ -32,7 +36,10 @@ public class ReservationManager {
 		return reservation;
 	}
 	 
-	
+	/**
+	 * Finds reservations containing either reservation code or airline.
+	 * @return Any matching Reservation objects.
+	 */
 	public ArrayList<Reservation> findReservations(String code, String airline, String name) throws IOException
 	{
 		populateFromBinary();
@@ -56,6 +63,10 @@ public class ReservationManager {
 		
 	}
 	
+	/**
+	 * Finds reservation with the exact reservation code.
+	 * @return Reservation object or null if none found.
+	 */
 	public Reservation findReservationByCode(String code) 
 	{ 	
 		Reservation findreservationcode = null;
@@ -70,7 +81,10 @@ public class ReservationManager {
 		return findreservationcode;
 	}
 	
-	
+	/**
+	 * Saves Reservation objects to a random access file.
+	 *
+	 */
 	public void persist() throws IOException
 	{
 		RandomAccessFile raf = new RandomAccessFile("res/reservation.dat", "rw");
@@ -105,6 +119,11 @@ public class ReservationManager {
 		
 	}
 	
+	
+	/**
+	 * Gets reservation code using a flight.
+	 * @return Reservation code.
+	 */
 	private String generateReservationCode(Flight flight)
 	{
 		String reservationcode = null;
@@ -122,6 +141,10 @@ public class ReservationManager {
 		return reservationcode;
 	}
 	
+	/**
+	 * Populates reservations with Reservation objects from Random Access File.
+	 * 
+	 */
 	private void populateFromBinary() throws IOException
 	{
 		this.reservations.clear();

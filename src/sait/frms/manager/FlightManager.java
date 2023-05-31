@@ -28,21 +28,38 @@ public class FlightManager {
 		populateAirports();
 	}
 
+	/**
+	 * Gets all of the flights.
+	 * @return ArrayList of Flight objects.
+	 */
 	public ArrayList<Flight> getFlights() 
 	{
 		return flights;
 	}
+	
+	/**
+	 * Gets all of the airports.
+	 * @return ArrayList of Airport objects.
+	 */
 	public ArrayList<String> getAirports() 
 	{
 		return airports;
 	}
-
+	
+	/**
+	 * Finds an airport with code.
+	 * @return Airport object or null if none found.
+	 */
 	public String findAirportByCode(String code)
 	{
 		return code;
 		
 	}
 	
+	/**
+	 * Finds a flight with code.
+	 * @return Flight object or null if none found.
+	 */
 	public Flight findFlightByCode(String code)
 	{
 		Flight findflightcode = null;
@@ -56,6 +73,10 @@ public class FlightManager {
 		return findflightcode;
 	}
 	
+	/**
+	 * Finds flights going between airports on a specified weekday.
+	 * @return Any found Flight objects.
+	 */
 	public ArrayList<Flight> findFlights(String from, String to, String weekday)
 	{
 		ArrayList<Flight> findflights;
@@ -73,6 +94,10 @@ public class FlightManager {
 		return findflights;
 	}
 	
+	/**
+	 * Populates flights ArrayList with Flight objects from CSV file.
+	 *
+	 */
 	private void populateFlights() throws FileNotFoundException
 	{
 		Scanner file = new Scanner(new File("res/flights.csv"));
@@ -91,6 +116,10 @@ public class FlightManager {
 		file.close();
 	}
 	
+	/**
+	 * Populates airports with Airport objects from CSV file.
+	 *
+	 */
 	private void populateAirports() throws FileNotFoundException
 	{
 		Scanner file = new Scanner(new File("res/airports.csv"));

@@ -63,6 +63,11 @@ public class ReservationsTab extends TabBase {
 		panel.add(southPanel, BorderLayout.SOUTH);
 	}
 	
+	/**
+	 * Creates the south panel.
+	 * @return JPanel that goes in south.
+	 */
+	
 	private JPanel createSouthPanel() {
 		JPanel panel = new JPanel();
 		
@@ -74,6 +79,10 @@ public class ReservationsTab extends TabBase {
 		return panel;
 	}
 	
+	/**
+	 * Creates the southsouth panel.
+	 * @return JPanel that goes in southsouth.
+	 */
 	private JPanel getSouthSouthPanel() {
 		JPanel panel = new JPanel();
 		JButton findReservationButton = new JButton("Find Reservations");
@@ -133,6 +142,10 @@ public class ReservationsTab extends TabBase {
 		return panel;
 	}
 	
+	/**
+	 * Creates the southnorth panel.
+	 * @return JPanel that goes in southnorth.
+	 */
 	private JPanel getSouthNorthPanel() {
 		JPanel panel = new JPanel();
 		JLabel title = new JLabel("Search", SwingConstants.CENTER);
@@ -204,6 +217,10 @@ public class ReservationsTab extends TabBase {
 		return panel;
 	}
 	
+	/**
+	 * Creates the centereast panel.
+	 * @return JPanel that goes in centereast.
+	 */
 	private JPanel getCenterEastPanel() {
 		JPanel panel = new JPanel();
 		panel.setLayout(new BorderLayout());
@@ -248,6 +265,10 @@ public class ReservationsTab extends TabBase {
 
 	}
 
+	/**
+	 * Creates the centereastcenter panel.
+	 * @return JPanel that goes in centereastcenter.
+	 */
 	private JPanel getCenterEastCenterPanel() 
 	{
 		String statuslist[] = {"Active", "Inactive"};
@@ -309,6 +330,10 @@ public class ReservationsTab extends TabBase {
 		return panel;
 	}
 
+	/**
+	 * Creates the centereastnorth panel.
+	 * @return JPanel that goes in centereastnorth.
+	 */
 	private JPanel getCenterEastNorthPanel() {
 		JPanel panel = new JPanel();
 		JLabel title = new JLabel("Reserve", SwingConstants.CENTER);
@@ -316,6 +341,11 @@ public class ReservationsTab extends TabBase {
 		panel.add(title);
 		return panel;
 	}
+	
+	/**
+	 * print reservation list
+	 * 
+	 */
 	private void printreservations() 
 	{
 		

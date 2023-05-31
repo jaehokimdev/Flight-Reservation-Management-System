@@ -43,17 +43,6 @@ public class FlightsTab extends TabBase implements ActionListener {
 	
 	private Flight selectedFlight;
 
-	/**
-	 * Creates the components for flights tab.
-	 */
-	/**
-	 * Creates the components for flights tab.
-	 * 
-	 * @param flightManager      Instance of FlightManager.
-	 * @param reservationManager Instance of ReservationManager
-	 * @throws FileNotFoundException
-	 */
-
 	private JComboBox fromlist;
 	private JComboBox tolist;
 	private JComboBox daylist;
@@ -64,6 +53,14 @@ public class FlightsTab extends TabBase implements ActionListener {
 	JTextField costText;
 	JTextField nameText;
 	JTextField citizenshipText;
+	
+	/**
+	 * Creates the components for flights tab.
+	 * 
+	 * @param flightManager      Instance of FlightManager.
+	 * @param reservationManager Instance of ReservationManager
+	 * @throws FileNotFoundException
+	 */
 
 	public FlightsTab(FlightManager flightManager, ReservationManager reservationManager) throws FileNotFoundException {
 		this.flightManager = flightManager;
@@ -81,6 +78,12 @@ public class FlightsTab extends TabBase implements ActionListener {
 		panel.add(southPanel, BorderLayout.SOUTH);
 	}
 
+	/**
+	 * Creates the south panel.
+	 * 
+	 * @return JPanel that goes in south.
+	 */
+	
 	private JPanel createSouthPanel() throws FileNotFoundException {
 		JPanel panel = new JPanel();
 
@@ -91,6 +94,12 @@ public class FlightsTab extends TabBase implements ActionListener {
 
 		return panel;
 	}
+	
+	/**
+	 * Creates the southsouth panel.
+	 * 
+	 * @return JPanel that goes in southsouth.
+	 */
 
 	private JPanel getSouthSouthPanel() {
 		JPanel panel = new JPanel();
@@ -111,6 +120,12 @@ public class FlightsTab extends TabBase implements ActionListener {
 		panel.setVisible(true);
 		return panel;
 	}
+	
+	/**
+	 * Creates the southcenter panel.
+	 * 
+	 * @return JPanel that goes in southcenter.
+	 */
 
 	private JPanel getSouthCenterPanel() throws FileNotFoundException {
 		String weekdaylist[] = { FlightManager.WEEKDAY_ANY, FlightManager.WEEKDAY_SUNDAY, FlightManager.WEEKDAY_MONDAY,
@@ -142,6 +157,12 @@ public class FlightsTab extends TabBase implements ActionListener {
 
 		return panel;
 	}
+	
+	/**
+	 * Creates the southnorth panel.
+	 * 
+	 * @return JPanel that goes in southnorth.
+	 */
 
 	private JPanel getSouthNorthPanel() {
 		JPanel panel = new JPanel();
@@ -215,6 +236,12 @@ public class FlightsTab extends TabBase implements ActionListener {
 
 		return panel;
 	}
+	
+	/**
+	 * Creates the centereast panel.
+	 * 
+	 * @return JPanel that goes in centereast.
+	 */
 
 	private JPanel getCenterEastPanel() {
 		JPanel panel = new JPanel();
@@ -226,6 +253,12 @@ public class FlightsTab extends TabBase implements ActionListener {
 
 		return panel;
 	}
+	
+	/**
+	 * Creates the centereastsouth panel.
+	 * 
+	 * @return JPanel that goes in centereastsouth.
+	 */
 
 	private JPanel getCenterEastSouthPanel() {
 		JPanel panel = new JPanel();
@@ -259,6 +292,12 @@ public class FlightsTab extends TabBase implements ActionListener {
 		return panel;
 
 	}
+	
+	/**
+	 * Creates the centereastcenter panel.
+	 * 
+	 * @return JPanel that goes in centereastcenter.
+	 */
 
 	private JPanel getCenterEastCenterPanel() {
 		JPanel panel = new JPanel();
@@ -318,6 +357,12 @@ public class FlightsTab extends TabBase implements ActionListener {
 
 		return panel;
 	}
+	
+	/**
+	 * Creates the centereastnorth panel.
+	 * 
+	 * @return JPanel that goes in centereastnorth.
+	 */
 
 	private JPanel getCenterEastNorthPanel() {
 		JPanel panel = new JPanel();
@@ -326,6 +371,11 @@ public class FlightsTab extends TabBase implements ActionListener {
 		panel.add(title);
 		return panel;
 	}
+	
+	/**
+	 * print findflight list.
+	 * 
+	 */
 
 	private void printflight() {
 		
