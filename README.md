@@ -30,12 +30,13 @@ After the reservation is completed, you can confirm the reservation by entering 
  - In the filght'array list that retrieves data from the Flights.scv file, it checks for a list that matches the information entered and displays the information.
  - By using randomAccessFile method to retrieve data more efficiently.
  - user can checkout appropriate information on screen
+ 
 ![find](https://github.com/jaehokimdev/Flight-Reservation-Management-System/assets/101899896/862759fa-acf3-459e-b0a4-c54bf9ca4863)
-
 
 2. Make Reservation
  - user input 'Full name' and 'Citizenship' for making reservation after checking and choosing appropriate flight information
  - This method should receive input arguments: a Flight object, the travelers name and citizenship
+ 
 ![make1](https://github.com/jaehokimdev/Flight-Reservation-Management-System/assets/101899896/c744b7ab-6d5e-41a5-88d0-690f673034aa)
 ![make2](https://github.com/jaehokimdev/Flight-Reservation-Management-System/assets/101899896/4f572705-bf68-49c1-8ae9-80a67681df65)
 
@@ -43,6 +44,7 @@ After the reservation is completed, you can confirm the reservation by entering 
  - search for an existing reservation that contains the specified reservation code, or airline or traveller’s full name
  - Show the list which matched reservation information with inputting infomation
  - Deu to loading data, also uses the randomAccessFile method for find proper information from data file
+
 ![find1](https://github.com/jaehokimdev/Flight-Reservation-Management-System/assets/101899896/b9ca0a4c-eb45-4336-a352-c985c53f9804)
 ![find2](https://github.com/jaehokimdev/Flight-Reservation-Management-System/assets/101899896/c3ff806a-f3e0-4ec0-8c6c-c6b48aa473a2)
 
@@ -50,6 +52,7 @@ After the reservation is completed, you can confirm the reservation by entering 
  - user can select the list that user want to edit 
  - Edit just the name, citizenship, and status
  - After that,  click update button user can notice update by seeing update pop-up window
+
 ![update1](https://github.com/jaehokimdev/Flight-Reservation-Management-System/assets/101899896/17ab7da7-b510-4d6a-baa6-122419df6d32)
 ![update2](https://github.com/jaehokimdev/Flight-Reservation-Management-System/assets/101899896/dd699785-3e99-4b80-98e7-0e51a4abd227)
 
