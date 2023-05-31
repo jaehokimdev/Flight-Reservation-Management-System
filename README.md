@@ -30,6 +30,7 @@ After the reservation is completed, you can confirm the reservation by entering 
  - In the filght'array list that retrieves data from the Flights.scv file, it checks for a list that matches the information entered and displays the information.
  - By using randomAccessFile method to retrieve data more efficiently.
  - user can checkout appropriate information on screen
+![find](https://github.com/jaehokimdev/Flight-Reservation-Management-System/assets/101899896/862759fa-acf3-459e-b0a4-c54bf9ca4863)
 
 
 2. Make Reservation
