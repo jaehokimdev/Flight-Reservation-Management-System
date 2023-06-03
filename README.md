@@ -1,3 +1,5 @@
+## What project is it?
+
 This program was developed to efficiently manage flight reservations to increase productivity and improve customer service.
 An appropriate GUI is provided so that the end-users who use this program can recognize the functions more conveniently and intuitively.
 The program also consists of two parts to manage and confirm flight reservations. 
@@ -5,8 +7,11 @@ It consists of a 'Flight' page where you can find and book a flight that meets t
 To select a flight, you can find your flight by entering the desired conditions and then entering your personal information to proceed with the reservation. 
 After the reservation is completed, you can confirm the reservation by entering personal information or flight information on the reservation page, and you can also modify it.
 
+## Languages and Tools
 
-=== How to run the program ===
+<p align="left"> <a href="https://www.java.com" target="_blank"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/java/java-original.svg" alt="java" width="40" height="40"/> </a> <a href="https://git-scm.com/" target="_blank">
+
+## How to run the program
 
 -Automatically done when the program is executed
 
@@ -23,7 +28,7 @@ After the reservation is completed, you can confirm the reservation by entering 
 3. Outputting a GUI window that the user can select and input
 
 
--function of management system.
+## Function of management system.
 
 1. Find Filghts
  - user input the originating airport, the destination airport, and the day of week
